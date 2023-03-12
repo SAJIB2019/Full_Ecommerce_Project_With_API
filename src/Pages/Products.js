@@ -7,10 +7,10 @@ const Products = () => {
   return (
     <div className="pt-28">
       <div className="container grid grid-cols-5">
-        <div className=" border-2 border-gray-700 col-span-1">
+        <div className="col-span-1">
           <FilterSection />
         </div>
-        <div className="grid-span-2 border-2 border-gray-700 col-span-4">
+        <div className="grid-span-2 col-span-4">
           <div>
             <Sort />
           </div>

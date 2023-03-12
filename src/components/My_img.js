@@ -7,11 +7,12 @@ const My_img = ({ img = [{ url: "" }] }) => {
       <div className="flex flex-row space-x-2 lg:space-x-0 lg:flex-col lg:space-y-2 justify-between items-center">
         {img.map((currentElement, index) => {
           return (
-            <figure key={index}>
+            <figure>
               <img
                 src={currentElement.url}
                 alt={currentElement.filename}
                 className="w-[120px] h-[100px]"
+                key={index}
                 onClick={() => setMainImage(currentElement)}
               />
             </figure>
