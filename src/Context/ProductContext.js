@@ -44,7 +44,7 @@ const AppProvider = ({ children }) => {
     getProducts(API);
   }, []);
   return (
-    <AppContext.Provider value={{ ...state, getSingleProduct }}>
+    <AppContext.Provider value={{ ...state, getSingleProduct, getProducts }}>
       {children}
     </AppContext.Provider>
   );

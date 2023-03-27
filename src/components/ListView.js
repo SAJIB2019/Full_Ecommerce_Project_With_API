@@ -5,10 +5,13 @@ const ListView = ({ products }) => {
   return (
     <div className="">
       <div>
-        {products.map((currentElement) => {
+        {products.map((currentElement, index) => {
           const { id, name, image, description, price } = currentElement;
           return (
-            <div className="grid grid-cols-1 md:grid-cols-2 py-3 border-2 border-gray-400">
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 py-3 border-2 border-gray-400"
+              key={index}
+            >
               <div className=" grid grid-cols-1 justify-items-center">
                 <img src={image} alt={name} className="w-full md:w-[250px]" />
               </div>

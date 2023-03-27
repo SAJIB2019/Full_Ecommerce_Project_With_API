@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const My_img = ({ img = [{ url: "" }] }) => {
   const [mainImage, setMainImage] = useState(img[0]);
+
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center space-y-2 lg:space-x-2 lg:pr-14">
       <div className="flex flex-row space-x-2 lg:space-x-0 lg:flex-col lg:space-y-2 justify-between items-center">

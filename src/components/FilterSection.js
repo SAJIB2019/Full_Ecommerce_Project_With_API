@@ -1,11 +1,13 @@
 import React from "react";
 import { useFilterContext } from "../Context/FilterContext";
+import FormatePrice from "../Helpers/FormatPrice";
 
 const FilterSection = () => {
   const {
-    filters: { text, category },
+    filters: { text, price, maxPrice, minPrice },
     all_products,
     updateFilterValue,
+    clearFilters,
   } = useFilterContext();
 
   //get the unique data
@@ -13,11 +15,18 @@ const FilterSection = () => {
     let newValue = data.map((curElm) => {
       return curElm[property];
     });
-    return (newValue = ["All", ...new Set(newValue)]);
+    if (property === "colors") {
+      return (newValue = ["All", ...new Set([].concat(...newValue))]);
+    } else {
+      return (newValue = ["All", ...new Set(newValue)]);
+    }
   };
 
   //unique data
   const categoryOnlyData = getUniqueData(all_products, "category");
+  const companyData = getUniqueData(all_products, "company");
+  const colorsData = getUniqueData(all_products, "colors");
+  console.log(colorsData);
   return (
     <div>
       <div className="grid grid-cols-1 space-y-2">
@@ -28,7 +37,7 @@ const FilterSection = () => {
               name="text"
               value={text}
               onChange={updateFilterValue}
-              placeholder="search"
+              placeholder="Search"
               className="w-full border-2 border-gray-700 rounded-md"
             />
           </form>
@@ -55,23 +64,54 @@ const FilterSection = () => {
         </div>
         <div className="grid grid-cols-1 space-y-2">
           <h1 className="font-Anton text-[20px]">Company</h1>
-          <select name="" id=""></select>
+          <form action="#">
+            <select name="company" id="company" onClick={updateFilterValue}>
+              {companyData.map((curElm, index) => {
+                return (
+                  <option value={curElm} name="company" key={index}>
+                    {curElm}
+                  </option>
+                );
+              })}
+            </select>
+          </form>
         </div>
         <div className="grid grid-cols-1 space-y-2">
-          <h1 className="font-Anton text-[20px]">Color</h1>
-          <p className="font-Lora text-[20px]">All</p>
-          <input type="text" className="border-2 border-gray-700 rounded-md" />
-          <input type="text" className="border-2 border-gray-700 rounded-md" />
-          <input type="text" className="border-2 border-gray-700 rounded-md" />
-          <input type="text" className="border-2 border-gray-700 rounded-md" />
-          <input type="text" className="border-2 border-gray-700 rounded-md" />
+          <h1 className="font-Anton text-[20px]">Colors</h1>
+          {colorsData.map((currentColor, index) => {
+            return (
+              <button
+                type="button"
+                style={{ backgroundColor: currentColor }}
+                key={index}
+                name="color"
+                value={currentColor}
+                onClick={updateFilterValue}
+                className="flex rounded-full"
+              >
+                {currentColor}
+              </button>
+            );
+          })}
         </div>
         <div>
           <h1 className="font-Anton text-[20px]">Price</h1>
-          <p className="font-Lora text-[20px]">price api</p>
+          <p>
+            <FormatePrice price={price} />
+          </p>
+          <input
+            type="range"
+            max={maxPrice}
+            min={minPrice}
+            value={price}
+            name="price"
+            onChange={updateFilterValue}
+          />
         </div>
         <div>
-          <button className="btn">Clear filter</button>
+          <button className="btn" onClick={clearFilters}>
+            Clear filter
+          </button>
         </div>
       </div>
     </div>

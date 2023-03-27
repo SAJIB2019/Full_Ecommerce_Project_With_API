@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const SingleNavBar = ({ Company }) => {
   return (
-    <div className="pt-16 bg-gray-300 flex items-center justify-start h-[150px] ">
+    <div className="bg-gray-300 flex items-center justify-start h-[60px] ">
       <div className="container flex justify-start items-center">
         <NavLink to="/" className="text-2xl text-blue-700">
           Home /{" "}
